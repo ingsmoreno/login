@@ -3,9 +3,9 @@ import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor( private readonly appService: AppService ) {}
+  constructor(private readonly appService: AppService) {}
 
-  @Get( 'users' )
+  @Get('users')
   getUsers(): string[] {
     return this.appService.getUsers();
   }
