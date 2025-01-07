@@ -8,22 +8,22 @@ import { UpdateUserDto } from './dto/update-user.dto';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(Users.name) private usersModule: Model<UsersDocument>,
+    @InjectModel(Users.name) private usersModel: Model<UsersDocument>,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const userCreated = await this.usersModule.create(createUserDto);
+    const userCreated = await this.usersModel.create(createUserDto);
 
     return userCreated;
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.usersModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
+  // async findOne(email: string) {
+  //   // return await this.usersModule.findOne(email);
+  // }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updateUserDto: UpdateUserDto) {
