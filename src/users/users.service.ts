@@ -1,6 +1,5 @@
 import { Users, UsersDocument } from './schema/users.schema';
 import { CreateUserDto } from './dto/create-user.dto';
-// import { FindUserDto } from './dto/find-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
@@ -22,7 +21,7 @@ export class UsersService {
     return await this.usersModel.find();
   }
 
-  // async findOne(email: FindUserDto) {
+  // async findOne(email: string) {
   //   // return await this.usersModule.findOne(email);
   // }
 
