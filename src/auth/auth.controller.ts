@@ -7,10 +7,10 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { RegisterAdminAuthDto, RegisterAuthDto } from './dto/register-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginAuthDto } from './dto/login-auth.dto';
-import { RegisterAuthDto } from './dto/register-auth.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -22,15 +22,16 @@ export class AuthController {
     return await this.authService.register(userObject);
   }
 
+  @Post('register/admin')
+  async registerAdminUser(@Body() userObject: RegisterAdminAuthDto) {
+    return await this.authService.registerAdmin(userObject);
+  }
+
   @Post('login')
   async loginUser(@Body() userObject: LoginAuthDto) {
     return await this.authService.login(userObject);
   }
 
-  @Post()
-  // create(@Body() createAuthDto: CreateAuthDto) {
-  //   // return this.authService.create(createAuthDto);
-  // }
   @Get()
   findAll() {
     return this.authService.findAll();

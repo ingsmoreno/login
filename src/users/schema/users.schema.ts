@@ -4,7 +4,7 @@ import { HydratedDocument } from 'mongoose';
 export type UsersDocument = HydratedDocument<Users>;
 
 export interface IUserSchema {
-  idNumber: number;
+  idNumber: string;
 
   firstName: string;
 
@@ -17,12 +17,14 @@ export interface IUserSchema {
   email: string;
 
   password: string;
+
+  role: string;
 }
 
 @Schema()
 export class Users implements IUserSchema {
   @Prop({ unique: true })
-  idNumber: number;
+  idNumber: string;
 
   @Prop()
   firstName: string;
@@ -41,6 +43,9 @@ export class Users implements IUserSchema {
 
   @Prop()
   password: string;
+
+  @Prop({ default: 'user' })
+  role: string;
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);

@@ -4,15 +4,21 @@ import {
   IsEmail,
   IsInt,
   IsNotEmpty,
+  IsString,
   IsStrongPassword,
   Max,
+  MaxLength,
   Min,
+  MinLength,
 } from 'class-validator';
-import { IUserSchema } from '../schema/users.schema';
+import { Users } from '../schema/users.schema';
 
-export class CreateUserDto implements IUserSchema {
+export class CreateUserDto extends Users {
+  @MinLength(7)
+  @MaxLength(10)
   @IsNotEmpty()
-  idNumber: number;
+  @IsString()
+  idNumber: string;
 
   @IsNotEmpty()
   firstName: string;
