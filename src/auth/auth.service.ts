@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { RegisterAdminAuthDto, RegisterAuthDto } from './dto/register-auth.dto';
 import { Users, UsersDocument } from 'src/users/schema/users.schema';
 import { compare, hash } from 'bcrypt';
 // import { CreateAuthDto } from './dto/create-auth.dto';
@@ -6,7 +7,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { JwtService } from '@nestjs/jwt';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { Model } from 'mongoose';
-import { RegisterAuthDto } from './dto/register-auth.dto';
 // import { UpdateAuthDto } from './dto/update-auth.dto';
 // import { UsersService } from 'src/users/users.service';
 
@@ -19,6 +19,16 @@ export class AuthService {
   ) {}
 
   async register(userObject: RegisterAuthDto) {
+    const { password } = userObject;
+    const plainToHash = await hash(password, 10);
+    userObject = {
+      ...userObject,
+      password: plainToHash,
+    };
+    return this.usersModel.create(userObject);
+  }
+
+  async registerAdmin(userObject: RegisterAdminAuthDto) {
     const { password } = userObject;
     const plainToHash = await hash(password, 10);
     userObject = {
