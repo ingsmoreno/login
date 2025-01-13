@@ -1,12 +1,13 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { RegisterAdminAuthDto, RegisterAuthDto } from './dto/register-auth.dto';
 import { Users, UsersDocument } from 'src/users/schema/users.schema';
-import { compare, hash } from 'bcrypt';
-// import { CreateAuthDto } from './dto/create-auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginAuthDto } from './dto/login-auth.dto';
+import LoginExceptionError from './handleExceptions/LoginExceptionError';
 import { Model } from 'mongoose';
+import { hash } from 'bcrypt';
+// import { CreateAuthDto } from './dto/create-auth.dto';
 // import { UpdateAuthDto } from './dto/update-auth.dto';
 // import { UsersService } from 'src/users/users.service';
 
@@ -42,13 +43,7 @@ export class AuthService {
     const { email, password } = userObject;
     const findUser = await this.usersModel.findOne({ email });
 
-    if (!findUser)
-      throw new HttpException('USER_NOT_FOUND', HttpStatus.NOT_FOUND);
-
-    const checkPassword = await compare(password, findUser.password);
-
-    if (!checkPassword)
-      throw new HttpException('INCORRECT_PASSWORD', HttpStatus.FORBIDDEN);
+    await LoginExceptionError(findUser, password);
 
     const payload = { id: findUser._id, name: findUser.firstName };
 

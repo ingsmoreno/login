@@ -10,6 +10,7 @@ import {
 import { RegisterAdminAuthDto, RegisterAuthDto } from './dto/register-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
+import ErrorHandlerException from './handleExceptions/ErrorHandlerException';
 import { LoginAuthDto } from './dto/login-auth.dto';
 
 @ApiTags('auth')
@@ -19,14 +20,21 @@ export class AuthController {
 
   @Post('register')
   async registerUser(@Body() userObject: RegisterAuthDto) {
-    return await this.authService.register(userObject);
+    try {
+      return await this.authService.register(userObject);
+    } catch (error) {
+      ErrorHandlerException(error);
+    }
   }
 
   @Post('register/admin')
   async registerAdminUser(@Body() userObject: RegisterAdminAuthDto) {
-    return await this.authService.registerAdmin(userObject);
+    try {
+      return await this.authService.registerAdmin(userObject);
+    } catch (error) {
+      ErrorHandlerException(error);
+    }
   }
-
   @Post('login')
   async loginUser(@Body() userObject: LoginAuthDto) {
     return await this.authService.login(userObject);
