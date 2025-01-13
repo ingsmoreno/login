@@ -42,7 +42,9 @@ export class CreateUserDto extends Users {
 
   @IsNotEmpty()
   @IsEmail()
-  @Contains('@gmail.com')
+  @Contains('@gmail.com', {
+    message: 'Must be a valid email [@gmail.com]',
+  })
   email: string;
 
   @IsStrongPassword()
