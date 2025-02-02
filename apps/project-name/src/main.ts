@@ -19,7 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('documentation', app, documentFactory);
 
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(process.env.PORT);
+  await app.listen(3001);
 }
 
 bootstrap();

@@ -1,13 +1,15 @@
+import { Inject, Injectable } from '@nestjs/common';
 import { Users, UsersDocument } from './schema/users.schema';
+import { ClientProxy } from '@nestjs/microservices';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
+    @Inject('MAIL_SERVICE') private clientMail: ClientProxy,
     @InjectModel(Users.name) private usersModel: Model<UsersDocument>,
   ) {}
 
@@ -32,5 +34,10 @@ export class UsersService {
 
   remove(id: number) {
     return `This action removes a #${id} user`;
+  }
+
+  newUser(user: any) {
+    this.clientMail.emit('new_email', user);
+    return 'send_queue';
   }
 }

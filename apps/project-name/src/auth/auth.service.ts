@@ -1,5 +1,5 @@
 import { RegisterAdminAuthDto, RegisterAuthDto } from './dto/register-auth.dto';
-import { Users, UsersDocument } from 'src/users/schema/users.schema';
+import { Users, UsersDocument } from '../users/schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
