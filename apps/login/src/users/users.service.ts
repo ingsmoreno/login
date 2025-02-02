@@ -38,6 +38,8 @@ export class UsersService {
 
   newUser(user: any) {
     this.clientMail.emit('new_email', user);
+    this.clientMail.emit('notifications', user);
+
     return 'send_queue';
   }
 }

@@ -14,7 +14,11 @@ import { UsersService } from './users.service';
       },
     ]),
     ClientsModule.register([
-      { name: 'MAIL_SERVICE', transport: Transport.TCP },
+      {
+        name: 'MAIL_SERVICE',
+        transport: Transport.REDIS,
+        options: { host: 'localhost', port: 6379 },
+      },
     ]),
   ],
   controllers: [UsersController],
