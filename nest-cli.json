@@ -36,6 +36,33 @@
       "compilerOptions": {
         "tsConfigPath": "apps/mailapp/tsconfig.app.json"
       }
+    },
+    "auth": {
+      "type": "application",
+      "root": "apps/auth",
+      "entryFile": "main",
+      "sourceRoot": "apps/auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/auth/tsconfig.app.json"
+      }
+    },
+    "users": {
+      "type": "application",
+      "root": "apps/users",
+      "entryFile": "main",
+      "sourceRoot": "apps/users/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/users/tsconfig.app.json"
+      }
+    },
+    "signup": {
+      "type": "application",
+      "root": "apps/signup",
+      "entryFile": "main",
+      "sourceRoot": "apps/signup/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/signup/tsconfig.app.json"
+      }
     }
   }
 }

@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Users, UsersDocument } from './schema/users.schema';
+import { Users, UsersDocument } from 'apps/users/src/schema/users.schema';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from '../../../signup/src/dto/create-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UpdateUserDto } from './dto/update-user.dto';
+// import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -28,9 +28,9 @@ export class UsersService {
   // }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
+  // update(id: number, updateUserDto: UpdateUserDto) {
+  //   return `This action updates a #${id} user`;
+  // }
 
   remove(id: number) {
     return `This action removes a #${id} user`;
